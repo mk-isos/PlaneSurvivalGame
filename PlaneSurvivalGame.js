@@ -1,5 +1,5 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
 canvas.width = 800;
 canvas.height = 600;
@@ -10,8 +10,8 @@ const player = {
   y: canvas.height - 50,
   width: 30,
   height: 30,
-  color: 'blue',
-  speed: 5
+  color: "blue",
+  speed: 5,
 };
 
 let enemies = [];
@@ -27,9 +27,9 @@ function spawnEnemy() {
     y: 0,
     width: 30,
     height: 30,
-    color: 'red',
+    color: "red",
     speed: 2,
-    bulletCooldown: 0
+    bulletCooldown: 0,
   };
   enemies.push(enemy);
 }
@@ -40,8 +40,8 @@ function shootBullet(enemy) {
     y: enemy.y + enemy.height,
     width: 10,
     height: 10,
-    color: 'yellow',
-    speed: 5
+    color: "yellow",
+    speed: 5,
   });
 }
 
@@ -50,9 +50,11 @@ function update() {
 
   // Update player position
   if (keys.ArrowUp && player.y > 0) player.y -= player.speed;
-  if (keys.ArrowDown && player.y < canvas.height - player.height) player.y += player.speed;
+  if (keys.ArrowDown && player.y < canvas.height - player.height)
+    player.y += player.speed;
   if (keys.ArrowLeft && player.x > 0) player.x -= player.speed;
-  if (keys.ArrowRight && player.x < canvas.width - player.width) player.x += player.speed;
+  if (keys.ArrowRight && player.x < canvas.width - player.width)
+    player.x += player.speed;
 
   // Spawn enemies
   const now = Date.now();
@@ -106,36 +108,42 @@ function update() {
 }
 
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw background
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // Draw player
   ctx.fillStyle = player.color;
   ctx.fillRect(player.x, player.y, player.width, player.height);
 
   // Draw enemies
-  enemies.forEach(enemy => {
+  enemies.forEach((enemy) => {
     ctx.fillStyle = enemy.color;
     ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
   });
 
   // Draw bullets
-  bullets.forEach(bullet => {
+  bullets.forEach((bullet) => {
     ctx.fillStyle = bullet.color;
     ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
   });
 
   // Draw score
-  ctx.fillStyle = 'black';
-  ctx.font = '20px Arial';
+  ctx.fillStyle = "white";
+  ctx.font = "20px Arial";
   ctx.fillText(`Score: ${score}`, 10, 20);
 
   // Game over text
   if (gameOver) {
-    ctx.fillStyle = 'red';
-    ctx.font = '40px Arial';
-    ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
-    ctx.font = '20px Arial';
-    ctx.fillText(`Your score: ${score}`, canvas.width / 2 - 80, canvas.height / 2 + 40);
+    ctx.fillStyle = "red";
+    ctx.font = "40px Arial";
+    ctx.fillText("Game Over", canvas.width / 2 - 100, canvas.height / 2);
+    ctx.font = "20px Arial";
+    ctx.fillText(
+      `Your score: ${score}`,
+      canvas.width / 2 - 80,
+      canvas.height / 2 + 40
+    );
   }
 }
 
@@ -147,7 +155,7 @@ function loop() {
   }
 }
 
-window.addEventListener('keydown', e => (keys[e.key] = true));
-window.addEventListener('keyup', e => (keys[e.key] = false));
+window.addEventListener("keydown", (e) => (keys[e.key] = true));
+window.addEventListener("keyup", (e) => (keys[e.key] = false));
 
 loop();
