@@ -10,10 +10,21 @@
         display: block;
         margin: 20px auto;
       }
+      button {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
     <canvas id="gameCanvas"></canvas>
+    <button id="restartButton">Restart</button>
     <script src="PlaneSurvivalGame.js"></script>
   </body>
 </html>
